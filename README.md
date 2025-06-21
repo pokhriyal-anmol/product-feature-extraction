@@ -110,22 +110,6 @@ print(extracted\_features)
 
 \# You can then process 'extracted\_features' further based on your needs.
 
-## **Contributing**
-
-We welcome contributions to this project\! If you have suggestions for improvements, find a bug, or want to add new features, please follow these guidelines:
-
-1. **Open an Issue:** Before submitting a pull request, please open an issue to discuss the bug or feature you'd like to address. This helps to ensure no duplicate work and aligns with the project's goals.  
-2. **Fork the Repository:** Create your own fork of the project on GitHub.  
-3. **Create a New Branch:** Create a new branch from main (or master) for your feature or bug fix:  
-   git checkout \-b feature/your-feature-name  
-   \# or: git checkout \-b bugfix/your-bug-fix-description
-
-4. **Make Your Changes:** Implement your changes, ensuring your code adheres to the existing style and conventions.  
-5. **Write Clear Commit Messages:** Use descriptive commit messages that explain the purpose of your changes.  
-6. **Push Your Branch:** Push your new branch to your forked repository.  
-   git push origin feature/your-feature-name
-
-7. **Open a Pull Request:** Open a pull request from your branch to the main (or master) branch of the original repository. Provide a clear description of your changes and reference any related issues.
 
 ## **License**
 
