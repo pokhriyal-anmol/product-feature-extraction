@@ -59,73 +59,70 @@ Follow these steps to set up the project environment on your local machine:
    * **On Windows (PowerShell):**  
      .\\venv\\Scripts\\Activate.ps1
 
+
 ## **Usage**
 
 ### **Running the Analysis Notebook**
 
 The most straightforward way to interact with and run the feature extraction pipeline is through the provided Jupyter Notebook:
 
-1. Start Jupyter Notebook:  
+1. **Start Jupyter Notebook:**  
    Ensure your virtual environment is active, then from the project root directory, run:  
+   ```bash
    jupyter notebook
+   ```
 
 2. Your default web browser will automatically open, displaying the Jupyter interface.  
-3. Navigate to the notebooks/ directory within the Jupyter interface.  
-4. Open the Product\_Feature\_Analysis.ipynb notebook.  
-5. Execute all cells in the notebook sequentially. This will guide you through data loading, image downloading, text extraction, and finally, dimension and unit parsing.
+3. Navigate to the `notebooks/` directory.  
+4. Open the `Product_Feature_Analysis.ipynb` notebook.  
+5. Execute all cells sequentially to load data, download images, extract text, and parse dimensions/units.
+
+---
 
 ### **Using as a Library**
 
-The core functionalities of this project are encapsulated in the src/ modules, allowing you to easily import and use them in your own Python scripts or applications.
+The core functionalities are encapsulated in the `src/` modules. You can import and use them in your own scripts:
 
-Here are examples of how to import and use the key functions:
+```python
+# Import core functions
+from src.data_processing import download_images, extract_text_from_image
+from src.feature_extraction import extract_dimensions, entity_unit_map, allowed_units, unit_abbreviation_map, irregular_plurals
+```
 
-\# Import core functions from your project's src modules  
-from src.data\_processing import download\_images, extract\_text\_from\_image  
-from src.feature\_extraction import extract\_dimensions, entity\_unit\_map, allowed\_units, unit\_abbreviation\_map, irregular\_plurals
+#### Example 1: Downloading images
+```python
+import pandas as pd
 
-\# Example 1: Downloading images  
-\# Assume 'df' is a pandas DataFrame with an 'image\_link' column  
-\# import pandas as pd  
-\# df \= pd.read\_csv('../dataset/your\_product\_data.csv') \# Adjust path to your dataset  
-\# image\_links \= df\['image\_link'\].tolist()  
-\# download\_folder \= '../images' \# Relative path for downloaded images  
-\# download\_images(image\_links, download\_folder)  
-\# print(f"Images have been downloaded to: {download\_folder}")
+df = pd.read_csv('../dataset/your_product_data.csv')  # Adjust path to your dataset
+image_links = df['image_link'].tolist()
+download_folder = '../images'
+download_images(image_links, download_folder)
+print(f"Images have been downloaded to: {download_folder}")
+```
 
-\# Example 2: Extracting text from a single image  
-image\_path\_example \= '/path/to/your/downloaded\_image.jpg' \# IMPORTANT: Replace with the actual path to one of your downloaded images'  
-extracted\_text \= extract\_text\_from\_image(image\_path\_example)  
-if extracted\_text:  
-    print(f"\\nExtracted Text from {image\_path\_example}:")  
-    print(extracted\_text)  
-else:  
-    print(f"\\nCould not extract text from {image\_path\_example}.")
+#### Example 2: Extracting text from an image
+```python
+image_path_example = '/path/to/your/downloaded_image.jpg'  # Replace with actual image path
+extracted_text = extract_text_from_image(image_path_example)
 
-\# Example 3: Extracting dimensions and units from text  
-sample\_product\_description \= "The package contains a widget measuring 12.5 cm x 5 in and weighing 2 lbs. It needs 220V."  
-extracted\_features \= extract\_dimensions(sample\_product\_description)  
-print(f"\\nExtracted Dimensions and Units from sample text:")  
-print(extracted\_features)
+if extracted_text:
+    print(f"\nExtracted Text from {image_path_example}:")
+    print(extracted_text)
+else:
+    print(f"\nCould not extract text from {image_path_example}.")
+```
 
-\# You can then process 'extracted\_features' further based on your needs.
+#### Example 3: Parsing dimensions and units
+```python
+sample_description = "The package contains a widget measuring 12.5 cm x 5 in and weighing 2 lbs. It needs 220V."
+extracted_features = extract_dimensions(sample_description)
 
-## **Contributing**
+print("\nExtracted Dimensions and Units:")
+print(extracted_features)
+```
 
-We welcome contributions to this project\! If you have suggestions for improvements, find a bug, or want to add new features, please follow these guidelines:
+You can further process `extracted_features` based on your application's requirements.
 
-1. **Open an Issue:** Before submitting a pull request, please open an issue to discuss the bug or feature you'd like to address. This helps to ensure no duplicate work and aligns with the project's goals.  
-2. **Fork the Repository:** Create your own fork of the project on GitHub.  
-3. **Create a New Branch:** Create a new branch from main (or master) for your feature or bug fix:  
-   git checkout \-b feature/your-feature-name  
-   \# or: git checkout \-b bugfix/your-bug-fix-description
-
-4. **Make Your Changes:** Implement your changes, ensuring your code adheres to the existing style and conventions.  
-5. **Write Clear Commit Messages:** Use descriptive commit messages that explain the purpose of your changes.  
-6. **Push Your Branch:** Push your new branch to your forked repository.  
-   git push origin feature/your-feature-name
-
-7. **Open a Pull Request:** Open a pull request from your branch to the main (or master) branch of the original repository. Provide a clear description of your changes and reference any related issues.
 
 ## **License**
 
